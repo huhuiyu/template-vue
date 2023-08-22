@@ -13,4 +13,15 @@
 - 代码格式化
   - 安装vscode插件`Prettier - Code formatter`
   - 安装prettier代码格式化模块：`npm install --save-dev --save-exact prettier`
-  - 统一vscode工作区和项目的格式化配置-参考[模板项目](/my-vue-app/)
+  - 统一vscode工作区和项目的格式化配置-参考[基础模板项目](/vue-basic/)
+- [完整模板项目](/vue-template/)
+  - 执行基本的项目创建流程
+  - 路由模块和项目简化
+    - 安装路由模块`npm install vue-router@4`
+    - 删除所有默认图标、样式、组件相关样式
+    - 添加`view`目录
+      - 添加首页和关于页面的视图文件
+    - 添加`router`目录
+      - 添加路由配置文件`index.ts`并添加首页和关于页面的路由配置
+    - 修改`App.vue`页面为路由模式
+    - 修改`main.ts`添加路由配置信息
