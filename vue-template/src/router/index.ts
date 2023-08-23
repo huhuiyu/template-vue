@@ -1,5 +1,13 @@
 import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router'
 
+// 测试模块路由
+const testRouters:any[]=[
+  {
+    path: '/test/elementui',
+    component: () => import('../view/test/ElementUI.vue'),
+  },
+];
+
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
@@ -9,7 +17,7 @@ const routes: RouteRecordRaw[] = [
     path: '/about',
     component: () => import('../view/About.vue'),
   },
-]
+].concat(testRouters)
 // 创建router
 const router = createRouter({
   // 配置为Hash模式

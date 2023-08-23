@@ -25,3 +25,8 @@
       - 添加路由配置文件`index.ts`并添加首页和关于页面的路由配置
     - 修改`App.vue`页面为路由模式
     - 修改`main.ts`添加路由配置信息
+  - 饿了么ui框架
+    - 安装饿了么ui框架`npm install element-plus --save`
+    - 安装按需导入`npm install -D unplugin-vue-components unplugin-auto-import`
+    - 修改`vite.config.ts`添加饿了么ui自动组件配置
+    - 国际化配置请参考`App.vue`中的设置
