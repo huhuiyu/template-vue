@@ -30,3 +30,7 @@
     - 安装按需导入`npm install -D unplugin-vue-components unplugin-auto-import`
     - 修改`vite.config.ts`添加饿了么ui自动组件配置
     - 国际化配置请参考`App.vue`中的设置
+  - 自定义ajax封装
+    - axios：`npm install axios`
+    - qs：`npm install qs`,`npm i --save--dev  @types/qs`
+    - spark-md5：`npm install spark-md5`,`npm i --save-dev @types/spark-md5`

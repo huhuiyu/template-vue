@@ -6,6 +6,10 @@ const testRouters:any[]=[
     path: '/test/elementui',
     component: () => import('../view/test/ElementUI.vue'),
   },
+  {
+    path: '/test/tools',
+    component: () => import('../view/test/Tools.vue'),
+  },
 ];
 
 const routes: RouteRecordRaw[] = [
