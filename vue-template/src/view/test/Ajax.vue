@@ -5,6 +5,7 @@ import TbUser from '../../ts/entity/UserInfo'
 import { Dept, Employee } from '../../ts/entity/Dept'
 import ApiService from '../../ts/ApiService'
 import Tools from '../../ts/Tools'
+
 const title = 'ajax测试'
 
 const viewdata = reactive({
@@ -17,6 +18,7 @@ const viewdata = reactive({
   dpage: new PageInfo(),
   epage: new PageInfo(),
   userInfo: new BaseUserResult(),
+  data: {},
 })
 
 function sendEcho() {
@@ -72,9 +74,17 @@ function queryEmp(dept: Dept) {
   })
 }
 
+function queryProvice() {
+  ApiService.post('/linkinfo/queryAllProvince', {}, (data: any) => {
+    viewdata.data = data
+  })
+}
+
 queryDept()
 
 queryUser()
+
+queryProvice()
 </script>
 
 <template>
@@ -120,6 +130,10 @@ queryUser()
       <div v-for="d in viewdata.elist">
         <span>{{ d.employeeName }}({{ d.phone }})</span>
       </div>
+    </div>
+
+    <div>
+      {{ viewdata.data }}
     </div>
   </div>
 </template>

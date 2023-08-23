@@ -1,7 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
 // 路由配置导入
-import { router } from './router'
+import { router } from './router/index'
 
 // 饿了么ui导入
 import 'element-plus/dist/index.css'
