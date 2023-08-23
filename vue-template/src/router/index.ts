@@ -10,6 +10,10 @@ const testRouters:any[]=[
     path: '/test/tools',
     component: () => import('../view/test/Tools.vue'),
   },
+  {
+    path: '/test/ajax',
+    component: () => import('../view/test/Ajax.vue'),
+  },
 ];
 
 const routes: RouteRecordRaw[] = [

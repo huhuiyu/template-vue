@@ -52,4 +52,4 @@ class BaseInfoListResult<T, K> extends BaseListResult<T> {
   info!: K
 }
 
-export { BaseResult as default, BaseDataResult as BaseDataResult, BaseListResult as BaseListResult, BaseUserResult as BaseUserResult, BaseInfoListResult as BaseInfoListResult }
+export { BaseResult as default, BaseDataResult as BaseDataResult, BaseListResult as BaseListResult, BaseUserResult as BaseUserResult, BaseInfoListResult as BaseInfoListResult,PageInfo as PageInfo }
