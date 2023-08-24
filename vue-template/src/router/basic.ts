@@ -20,6 +20,14 @@ const routers = [
     path: '/basic/method',
     component: () => import('../view/basic/Method.vue'),
   },
+  {
+    path: '/basic/pinia',
+    component: () => import('../view/basic/Pinia.vue'),
+  },
+  {
+    path: '/basic/piniaother',
+    component: () => import('../view/basic/PiniaOther.vue'),
+  },
 ]
 
 export default routers

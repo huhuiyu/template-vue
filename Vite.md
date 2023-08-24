@@ -34,3 +34,5 @@
     - axios：`npm install axios`
     - qs：`npm install qs`,`npm i --save--dev  @types/qs`
     - spark-md5：`npm install spark-md5`,`npm i --save-dev @types/spark-md5`
+  - pinia状态管理库
+    - 安装：`npm install pinia`
