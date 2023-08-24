@@ -11,6 +11,9 @@ import { createPinia } from 'pinia'
 
 const app = createApp(App)
 
+import './style/index.scss'
+import './style/var.scss'
+
 // 使用路由
 app.use(router)
 

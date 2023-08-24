@@ -58,12 +58,12 @@ function changeColor() {
   {{ mode }}
   <hr />
 
-  <div class="menus">
+  <div class="menus tc">
     <span :class="{ active: menu == 1 }" @click="menu = 1">面版一</span>
     <span :class="{ active: menu == 2 }" @click="menu = 2">面版二</span>
     <span :class="{ active: menu == 3 }" @click="menu = 3">面版三</span>
   </div>
-  <div class="infos">
+  <div class="infos tc">
     <div>
       <Transition name="one">
         <div v-if="menu == 1">内容一</div>
@@ -80,60 +80,66 @@ function changeColor() {
     {{ menu }}
   </div>
 </template>
-<style>
-.night-style span {
-  background-color: #222;
-  color: #fff;
+<style lang="scss" scoped>
+@import '../../style/var.scss';
+.night-style {
+  span {
+    background-color: #222;
+    color: #fff;
+  }
 }
-.day-style span {
-  background-color: #ddd;
-  color: #000;
+.day-style {
+  span {
+    background-color: #ddd;
+    color: #000;
+  }
 }
-.colorful span {
-  background-color: #d6314c;
-  color: #ff0;
+.colorful {
+  span {
+    background-color: #d6314c;
+    color: #ff0;
+  }
 }
 
-.mystyle span {
-  display: inline-block;
-  border-radius: 2rem;
-  margin: 0.2rem 1rem;
-  padding: 0.5rem 1rem;
+.mystyle {
+  span {
+    display: inline-block;
+    border-radius: 2rem;
+    margin: 0.2rem 1rem;
+    padding: 0.5rem 1rem;
+  }
 }
 
 .menus {
   padding: 1rem;
-  text-align: center;
-}
-
-.menus > span {
-  display: inline-block;
-  margin: 0px 1rem;
-  padding: 0.5rem 1rem;
-  border: 1px solid #d6314c;
-  border-radius: 0.5rem;
-  cursor: pointer;
-}
-
-.menus > span:hover,
-.menus .active {
-  color: #d6314c;
+  > span {
+    display: inline-block;
+    margin: 0px 1rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid $primary-text-color;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    &:hover {
+      color: $primary-text-color;
+    }
+  }
+  .active {
+    color: $primary-text-color;
+  }
 }
 
 .infos {
   position: relative;
   height: 10vh;
   overflow: hidden;
-}
-
-.infos > div > div {
-  height: calc(100% - 1rem);
-  text-align: center;
-  box-sizing: border-box;
-  border: 1px solid #d6314c;
-  position: absolute;
-  width: calc(100% - 1rem);
-  margin: 0.5rem;
+  > div > div {
+    height: calc(100% - 1rem);
+    box-sizing: border-box;
+    border: 1px solid $primary-text-color;
+    position: absolute;
+    width: calc(100% - 1rem);
+    margin: 0.5rem;
+  }
 }
 
 .one-leave-active,

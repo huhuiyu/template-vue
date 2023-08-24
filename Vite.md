@@ -36,3 +36,6 @@
     - spark-md5：`npm install spark-md5`,`npm i --save-dev @types/spark-md5`
   - pinia状态管理库
     - 安装：`npm install pinia`
+  - sass样式
+    - 安装：`npm install -D sass`
+    - 安装vscode插件：`SCSS IntelliSense`
