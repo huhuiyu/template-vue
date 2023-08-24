@@ -3,6 +3,12 @@ import { createRouter, RouteRecordRaw, createWebHistory } from 'vue-router'
 // 基础知识点路由
 import basicRouters from './basic'
 
+// 数据管理演示路由
+import manageRouters from './manage'
+
+// 错误路由，最好放置在路由的最后
+import errorRouters from './error'
+
 // 测试模块路由
 const testRouters: any[] = [
   {
@@ -31,6 +37,8 @@ const routes: RouteRecordRaw[] = [
 ]
   .concat(testRouters)
   .concat(basicRouters)
+  .concat(manageRouters)
+  .concat(errorRouters)
 
 // 创建router
 const router = createRouter({
