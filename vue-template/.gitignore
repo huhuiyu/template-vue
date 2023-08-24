@@ -25,3 +25,4 @@ dist-ssr
 # 自动导入类型文件忽略
 auto-imports.d.ts
 components.d.ts
+task.txt
