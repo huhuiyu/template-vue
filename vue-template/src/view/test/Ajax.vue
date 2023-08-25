@@ -28,7 +28,7 @@ function sendEcho() {
 }
 
 function login() {
-  viewdata.user.password = Tools.md5(viewdata.user.password)
+  viewdata.user.password = Tools.md5(viewdata.user.password || '')
   ApiService.post('/user/auth/login', viewdata.user, (data: BaseUserResult) => {
     viewdata.userResult = data
   })

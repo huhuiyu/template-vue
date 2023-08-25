@@ -4,14 +4,15 @@
  * 用户基本信息
  */
 class TbUser {
-  accessKey: string = ''
-  enable: string = ''
-  lastupdate: number = 0
-  nickname: string = ''
-  password: string = ''
-  role: string = ''
-  uid: number = 0
-  username: string = ''
+  accessKey: string | null = null
+  enable: string | null = null
+  lastupdate: number | null = null
+  nickname: string | null = null
+  password: string | null = null
+  role: string | null = null
+  uid: number | null = null
+  username: string | null = null
+
   constructor() {}
 }
 
@@ -19,15 +20,15 @@ class TbUser {
  * 用户附加信息
  */
 class TbUserInfo {
-  email: string = ''
-  img: string = ''
-  lastupdate: number = 0
-  info: string = ''
-  phone: string = ''
-  qq: string = ''
-  sex: string = ''
-  wechat: string = ''
-  uid: number = 0
+  email: string | null = null
+  img: string | null = null
+  lastupdate: number | null = null
+  info: string | null = null
+  phone: string | null = null
+  qq: string | null = null
+  sex: string | null = null
+  wechat: string | null = null
+  uid: number | null = null
 
   constructor() {}
 }
@@ -36,16 +37,16 @@ class TbUserInfo {
  * 用户其它信息
  */
 class UserOtherInfo {
-  follow: number = 0
-  followMe: number = 0
+  follow: number | null = null
+  followMe: number | null = null
   followMine: boolean = false
-  message: number = 0
+  message: number | null = null
   mineFollow: boolean = false
-  regDays: number = 0
-  reply: number = 0
-  supporteMessage: number = 0
-  supporteReply: number = 0
-  totalHits: number = 0
+  regDays: number | null = null
+  reply: number | null = null
+  supporteMessage: number | null = null
+  supporteReply: number | null = null
+  totalHits: number | null = null
 
   constructor() {}
 }

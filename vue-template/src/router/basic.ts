@@ -33,6 +33,10 @@ const routers = [
     path: '/basic/piniaother',
     component: () => import('../view/basic/PiniaOther.vue'),
   },
+  {
+    path: '/basic/validate',
+    component: () => import('../view/basic/Validate.vue'),
+  },
 ].concat(sub)
 
 export default routers

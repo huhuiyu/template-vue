@@ -23,8 +23,6 @@ const viewdata = reactive({
   adding: false,
 })
 
-viewdata.page.pageSize = 5
-
 // 查询部门信息
 function query() {
   viewdata.querying = true
