@@ -1,16 +1,18 @@
 // 部门和员工信息
 class Dept {
-  deptId: number = 0
+  deptId: number | null = null
   deptInfo: string = ''
   deptName: string = ''
-  lastupdate: string = ''
+  lastupdate: string | null = null
 }
+
 class Employee {
-  deptId: number = 0
-  employeeId: number = 0
+  deptId: number | null = null
+  employeeId: number | null = null
   employeeName: string = ''
-  lastupdate: string = ''
+  lastupdate: string | null = null
   phone: string = ''
-  dept: Dept = new Dept()
+  dept: Dept | null = null
 }
+
 export { Dept as Dept, Employee as Employee }

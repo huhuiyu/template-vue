@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { ElTag, ElRow, ElCol } from 'element-plus'
+import { ElTag, ElRow, ElCol, ElMessageBox, ElLoading } from 'element-plus'
 import { reactive } from 'vue'
-import { BaseListResult, PageInfo } from '../../ts/entity/ServerResultInfo'
+import BaseResult, { BaseListResult, PageInfo } from '../../ts/entity/ServerResultInfo'
 import { Dept } from '../../ts/entity/Dept'
 const title = '部门管理'
 import ApiService from '../../ts/ApiService'
@@ -15,8 +15,10 @@ const viewdata = reactive({
     deptName: '',
   },
   modifyInfo: new Dept(),
-  delInfo: new Dept(),
   querying: false,
+  avisible: false,
+  addInfo: new Dept(),
+  adding: false,
 })
 
 viewdata.page.pageSize = 5
@@ -43,7 +45,39 @@ function showModify(info: Dept) {
 }
 
 function del(info: Dept) {
-  viewdata.delInfo = info
+  ElMessageBox.confirm(`是否删除部门：${info.deptName}？`, '删除确认', { type: 'warning' })
+    .then(() => {
+      const loading = ElLoading.service({ lock: true, text: '部门删除中，请稍候。。。' })
+      ApiService.post(
+        '/manage/dept/delete',
+        info,
+        (data: BaseResult) => {
+          loading.close()
+          ElMessageBox.alert(data.message, '删除结果')
+          if (data.success) {
+            query()
+          }
+        },
+        true,
+      )
+    })
+    .catch(() => {})
+}
+
+function showAdd() {
+  viewdata.addInfo = new Dept()
+  viewdata.avisible = true
+}
+
+function add() {
+  viewdata.adding = true
+  ApiService.post('/manage/dept/add', viewdata.addInfo, (data: BaseResult) => {
+    viewdata.adding = false
+    if (data.success) {
+      viewdata.addInfo = new Dept()
+      ElMessageBox.alert(data.message, '部门添加')
+    }
+  })
 }
 
 query()
@@ -66,6 +100,9 @@ query()
         </ElFormItem>
         <ElFormItem>
           <ElButton v-loading="viewdata.querying" @click="requery()" type="primary">查询</ElButton>
+        </ElFormItem>
+        <ElFormItem>
+          <ElButton type="success" @click="showAdd">添加</ElButton>
         </ElFormItem>
       </ElForm>
     </ElRow>
@@ -90,6 +127,29 @@ query()
 
     <div class="pd10">
       <ElPagination :page-sizes="[5, 10, 20]" layout="prev, pager, next, sizes" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @size-change="requery" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
+      <ElPagination layout="pager" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
     </div>
+  </div>
+
+  <div>
+    <ElDialog v-model="viewdata.avisible" title="添加部门信息" :close-on-click-modal="false">
+      <div>
+        <ElForm>
+          <ElFormItem>
+            <ElInput v-loading="viewdata.adding" placeholder="部门名称" v-model="viewdata.addInfo.deptName"></ElInput>
+          </ElFormItem>
+          <ElFormItem>
+            <ElInput v-loading="viewdata.adding" placeholder="部门描述" v-model="viewdata.addInfo.deptInfo"></ElInput>
+          </ElFormItem>
+        </ElForm>
+        <div>
+          {{ viewdata.addInfo }}
+        </div>
+      </div>
+      <template #footer>
+        <ElButton type="danger" @click="viewdata.avisible = false">关闭</ElButton>
+        <ElButton type="success" @click="add">添加</ElButton>
+      </template>
+    </ElDialog>
   </div>
 </template>

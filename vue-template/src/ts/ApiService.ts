@@ -1,6 +1,7 @@
 // 后端api接口服务处理对象
 import Ajax, { AjaxConfig } from './Ajax'
 import qs from 'qs'
+import loadsh from 'lodash'
 import BaseResult from './entity/ServerResultInfo'
 
 /**
@@ -31,6 +32,10 @@ ajax.before = (config: AjaxConfig) => {
   // 请求地址补全
   config.url = serverInfo.url + config.url
   // 处理json参数
+  config.param = loadsh.pickBy(config.param, (value, key) => {
+    // 不提交lastupdate字段和null以及undefined字段
+    return key != 'lastupdate' && value != null && value != undefined
+  })
   config.param = qs.stringify(config.param, { allowDots: true })
   // 处理get请求（如果链接带有?查询参数就拼接&，否则就直接拼接查询参数）
   let getStr = config.url.indexOf('?') > -1 ? '&' : '?'
