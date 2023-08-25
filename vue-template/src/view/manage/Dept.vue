@@ -15,6 +15,8 @@ const viewdata = reactive({
     deptName: '',
   },
   modifyInfo: new Dept(),
+  mvisible: false,
+  modifying: false,
   querying: false,
   avisible: false,
   addInfo: new Dept(),
@@ -42,6 +44,18 @@ function requery() {
 
 function showModify(info: Dept) {
   viewdata.modifyInfo = info
+  viewdata.mvisible = true
+}
+
+function modify() {
+  viewdata.modifying = true
+  ApiService.post('/manage/dept/update', viewdata.modifyInfo, (data: BaseResult) => {
+    viewdata.modifying = false
+    if (data.success) {
+      viewdata.addInfo = new Dept()
+      ElMessageBox.alert(data.message, '部门修改')
+    }
+  })
 }
 
 function del(info: Dept) {
@@ -132,7 +146,7 @@ query()
   </div>
 
   <div>
-    <ElDialog v-model="viewdata.avisible" title="添加部门信息" :close-on-click-modal="false">
+    <ElDialog v-model="viewdata.avisible" title="添加部门信息" :close-on-click-modal="false" @closed="query">
       <div>
         <ElForm>
           <ElFormItem>
@@ -142,13 +156,29 @@ query()
             <ElInput v-loading="viewdata.adding" placeholder="部门描述" v-model="viewdata.addInfo.deptInfo"></ElInput>
           </ElFormItem>
         </ElForm>
-        <div>
-          {{ viewdata.addInfo }}
-        </div>
       </div>
       <template #footer>
         <ElButton type="danger" @click="viewdata.avisible = false">关闭</ElButton>
         <ElButton type="success" @click="add">添加</ElButton>
+      </template>
+    </ElDialog>
+  </div>
+
+  <div>
+    <ElDialog v-model="viewdata.mvisible" title="修改部门信息" :close-on-click-modal="false" @closed="query">
+      <div>
+        <ElForm>
+          <ElFormItem>
+            <ElInput v-loading="viewdata.modifying" placeholder="部门名称" v-model="viewdata.modifyInfo.deptName"></ElInput>
+          </ElFormItem>
+          <ElFormItem>
+            <ElInput v-loading="viewdata.modifying" placeholder="部门描述" v-model="viewdata.modifyInfo.deptInfo"></ElInput>
+          </ElFormItem>
+        </ElForm>
+      </div>
+      <template #footer>
+        <ElButton type="danger" @click="viewdata.mvisible = false">关闭</ElButton>
+        <ElButton type="success" @click="modify">保存</ElButton>
       </template>
     </ElDialog>
   </div>
