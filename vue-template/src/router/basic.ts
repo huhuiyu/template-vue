@@ -1,3 +1,4 @@
+import sub from './sub'
 // 分文件路由配置
 const routers = [
   {
@@ -11,6 +12,10 @@ const routers = [
   {
     path: '/basic/routerparam',
     component: () => import('../view/basic/RouterParam.vue'),
+  },
+  {
+    path: '/basic/routerpath/:id',
+    component: () => import('../view/basic/RouterPath.vue'),
   },
   {
     path: '/basic/lifecircle',
@@ -28,6 +33,6 @@ const routers = [
     path: '/basic/piniaother',
     component: () => import('../view/basic/PiniaOther.vue'),
   },
-]
+].concat(sub)
 
 export default routers
