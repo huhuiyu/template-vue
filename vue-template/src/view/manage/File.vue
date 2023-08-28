@@ -8,6 +8,7 @@ import Tools, { FileInfo } from '../../ts/Tools'
 import BaseResult, { BaseDataResult, BaseListResult, PageInfo } from '../../ts/entity/ServerResultInfo'
 import TbFile from '../../ts/entity/TbFile'
 import { ElMessageBox, ElLoading } from 'element-plus'
+import PageComp from '../../components/PageComp.vue'
 
 const router = useRouter()
 
@@ -141,8 +142,12 @@ query()
         </ElTableColumn>
       </ElTable>
 
-      <div class="pd10">
-        <ElPagination :hide-on-single-page="true" layout="prev,pager,next,total" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
+      <div>
+        <PageComp :page="viewdata.page" @number-change="query">
+          <template #default>文件分页信息：</template>
+          <template #page-end>总页数：{{ viewdata.page.pageCount }}</template>
+        </PageComp>
+        <PageComp :hide-on-single-page="false" :page="viewdata.page" :sizes="[3, 5, 10, 20]" :layout="'sizes, jumper, prev, pager, next, total'" @number-change="query" @size-change="requery"></PageComp>
       </div>
     </div>
 
