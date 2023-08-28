@@ -138,13 +138,13 @@ query()
     </ElTable>
 
     <div class="pd10">
-      <ElPagination :page-sizes="[5, 10, 20]" layout="prev, pager, next, sizes" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @size-change="requery" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
+      <ElPagination :page-sizes="[5, 10, 20]" layout="sizes, jumper, ->, prev, pager, next, total" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @size-change="requery" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
       <ElPagination layout="pager" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
     </div>
   </div>
 
   <div>
-    <ElDialog v-model="viewdata.avisible" title="添加部门信息" :close-on-click-modal="false" @closed="query">
+    <ElDialog v-model="viewdata.avisible" title="添加部门信息" :close-on-click-modal="false" @closed="query" width="30%">
       <div>
         <ElForm>
           <ElFormItem>
