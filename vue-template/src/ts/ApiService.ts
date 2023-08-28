@@ -62,7 +62,7 @@ const ApiService = {
   get: (url: string, param: any, cb: any, handleMessage = false) => {
     ajax.send(AjaxConfig.buildGetConfig(url, param, cb, handleMessage))
   },
-  upload: (url: string, file: File, param: any, cb: any, handleMessage = false) => {
+  upload: (url: string, file: File | any, param: any, cb: any, handleMessage = false) => {
     let config = AjaxConfig.buildPostConfig(url, param, cb, handleMessage)
     ajax.upload(config, file)
   },

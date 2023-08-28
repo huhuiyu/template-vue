@@ -103,6 +103,11 @@ class Tools {
   //#region 文件相关方法
 
   /**
+   * 最大文件上传限制
+   */
+  static MAX_FILE_SIZE = 2 * 1024 * 1024
+
+  /**
    * 获取文件信息
    * @param file 文件对象
    * @param fileinfo 文件信息对象
@@ -192,7 +197,7 @@ class Tools {
     file.addEventListener('change', () => {
       console.log('文件选中变化', file.files)
       let files = new Array<FileInfo>()
-      if (file.files) {
+      if (file.files && file.files.length > 0) {
         for (let index = 0; index < file.files.length; index++) {
           const elefile = file.files[index]
           let result = Tools.getFileInfo(elefile)

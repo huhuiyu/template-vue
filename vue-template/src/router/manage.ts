@@ -12,6 +12,10 @@ const routers = [
     path: '/manage/user/main',
     component: () => import('../view/manage/UserMain.vue'),
   },
+  {
+    path: '/manage/user/file',
+    component: () => import('../view/manage/File.vue'),
+  },
 ]
 
 export default routers
