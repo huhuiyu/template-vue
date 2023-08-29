@@ -37,6 +37,10 @@ const routers = [
     path: '/basic/validate',
     component: () => import('../view/basic/Validate.vue'),
   },
+  {
+    path: '/basic/comp',
+    component: () => import('../view/basic/Comp.vue'),
+  },
 ].concat(sub)
 
 export default routers
