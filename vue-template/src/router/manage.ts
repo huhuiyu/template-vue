@@ -5,6 +5,14 @@ const routers = [
     component: () => import('../view/manage/Dept.vue'),
   },
   {
+    path: '/manage/deptinfo',
+    component: () => import('../view/manage/DeptInfo.vue'),
+  },
+  {
+    path: '/manage/employee',
+    component: () => import('../view/manage/Employee.vue'),
+  },
+  {
     path: '/manage/login',
     component: () => import('../view/manage/Login.vue'),
   },

@@ -1,11 +1,26 @@
 <script setup lang="ts">
-import { ElTag, ElRow, ElCol, ElMessageBox, ElLoading } from 'element-plus'
-import { reactive } from 'vue'
-import BaseResult, { BaseListResult, PageInfo } from '../../ts/entity/ServerResultInfo'
-import { Dept } from '../../ts/entity/Dept'
-const title = '部门管理'
-import ApiService from '../../ts/ApiService'
-import Tools from '../../ts/Tools'
+import { ElRow, ElMessageBox, ElLoading } from 'element-plus'
+import { reactive, onMounted } from 'vue'
+import BaseResult, { BaseListResult, PageInfo } from '../ts/entity/ServerResultInfo'
+import { Dept } from '../ts/entity/Dept'
+
+import ApiService from '../ts/ApiService'
+import Tools from '../ts/Tools'
+import PageComp from '../components/PageComp.vue'
+
+const props = defineProps({
+  mode: {
+    type: String,
+    required: false,
+    default: 'manage',
+  },
+})
+
+const emits = defineEmits(['dept-selected'])
+
+function selectDept(info: Dept) {
+  emits('dept-selected', Tools.concatJson(info))
+}
 
 // 视图数据
 const viewdata = reactive({
@@ -21,6 +36,14 @@ const viewdata = reactive({
   avisible: false,
   addInfo: new Dept(),
   adding: false,
+})
+
+onMounted(() => {
+  if (props.mode == 'selector') {
+    viewdata.page.pageSize = 5
+  }
+
+  query()
 })
 
 // 查询部门信息
@@ -50,6 +73,7 @@ function modify() {
   ApiService.post('/manage/dept/update', viewdata.modifyInfo, (data: BaseResult) => {
     viewdata.modifying = false
     if (data.success) {
+      viewdata.addInfo = new Dept()
       ElMessageBox.alert(data.message, '部门修改')
     }
   })
@@ -90,19 +114,9 @@ function add() {
     }
   })
 }
-
-query()
 </script>
 
 <template>
-  <div>
-    <ElRow justify="center" class="pd10">
-      <ElCol :span="1">
-        <ElTag type="success" size="large">{{ title }}</ElTag>
-      </ElCol>
-    </ElRow>
-  </div>
-
   <div>
     <ElRow justify="end" class="pd10">
       <ElForm :inline="true">
@@ -122,23 +136,23 @@ query()
   <div>
     <ElTable :data="viewdata.list" v-loading="viewdata.querying">
       <ElTableColumn prop="deptName" label="部门名称"></ElTableColumn>
-      <ElTableColumn prop="deptInfo" label="部门描述"></ElTableColumn>
-      <ElTableColumn label="信息最后修改时间">
+      <ElTableColumn v-if="mode == 'manage'" prop="deptInfo" label="部门描述"></ElTableColumn>
+      <ElTableColumn v-if="mode == 'manage'" label="信息最后修改时间">
         <template #default="scope">
           {{ Tools.formatDate(scope.row.lastupdate) }}
         </template>
       </ElTableColumn>
       <ElTableColumn label="操作">
         <template #default="scope">
-          <ElButton @click="showModify(scope.row)" type="primary">修改</ElButton>
-          <ElButton @click="del(scope.row)" type="danger">删除</ElButton>
+          <ElButton v-if="mode == 'manage'" @click="showModify(scope.row)" type="primary">修改</ElButton>
+          <ElButton v-if="mode == 'manage'" @click="del(scope.row)" type="danger">删除</ElButton>
+          <ElButton v-if="mode == 'selector'" @click="selectDept(scope.row)" type="success">选择</ElButton>
         </template>
       </ElTableColumn>
     </ElTable>
 
-    <div class="pd10">
-      <ElPagination :page-sizes="[5, 10, 20]" layout="sizes, jumper, ->, prev, pager, next, total" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @size-change="requery" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
-      <ElPagination layout="pager" :total="viewdata.page.total" v-model:page-size="viewdata.page.pageSize" @current-change="query" v-model:current-page="viewdata.page.pageNumber"></ElPagination>
+    <div>
+      <PageComp :page="viewdata.page" @number-change="query" @size-change="requery"></PageComp>
     </div>
   </div>
 
