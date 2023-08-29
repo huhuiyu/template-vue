@@ -9,6 +9,7 @@ import BaseResult, { BaseDataResult, BaseListResult, PageInfo } from '../../ts/e
 import TbFile from '../../ts/entity/TbFile'
 import { ElMessageBox, ElLoading } from 'element-plus'
 import PageComp from '../../components/PageComp.vue'
+import FilePreviewComp from '../../components/FilePreviewComp.vue'
 
 const router = useRouter()
 
@@ -23,6 +24,8 @@ const viewdata = reactive({
   addInfo: new TbFile(),
   selectedFile: new FileInfo(),
   uploading: false,
+  fvisible: false,
+  vfile: new TbFile(),
 })
 
 viewdata.page.pageSize = 3
@@ -91,6 +94,11 @@ function del(info: TbFile) {
     .catch(() => {})
 }
 
+function showFile(info: TbFile) {
+  viewdata.vfile = info
+  viewdata.fvisible = true
+}
+
 query()
 </script>
 
@@ -135,9 +143,10 @@ query()
             {{ Tools.formatDate(scope.row.lastupdate) }}
           </template>
         </ElTableColumn>
-        <ElTableColumn label="信息最后修改时间">
+        <ElTableColumn label="操作">
           <template #default="scope">
             <ElButton @click="del(scope.row)" type="danger">删除</ElButton>
+            <ElButton @click="showFile(scope.row)" type="success">预览</ElButton>
           </template>
         </ElTableColumn>
       </ElTable>
@@ -169,6 +178,14 @@ query()
           <ElButton v-loading="viewdata.uploading" type="danger" @click="viewdata.avisible = false">关闭</ElButton>
           <ElButton v-loading="viewdata.uploading" :disabled="!viewdata.selectedFile.file" type="success" @click="add">上传</ElButton>
         </template>
+      </ElDialog>
+    </div>
+
+    <div>
+      <ElDialog v-model="viewdata.fvisible" title="文件预览" :close-on-click-modal="false">
+        <div>
+          <FilePreviewComp :info="viewdata.vfile"></FilePreviewComp>
+        </div>
       </ElDialog>
     </div>
   </div>

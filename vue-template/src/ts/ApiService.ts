@@ -67,7 +67,7 @@ const ApiService = {
     ajax.upload(config, file)
   },
   // 获取文件下载地址
-  getDownloadUrl: (fid: number | string) => {
+  getDownloadUrl: (fid: number | string | null) => {
     return `${serverInfo.url}${serverInfo.downloadUrl}?fid=${fid}`
   },
   // 是否为文件下载地址，如果是返回fid信息，否则返回-1

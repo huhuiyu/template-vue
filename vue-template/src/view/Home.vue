@@ -8,5 +8,7 @@
     <RouterLink to="/manage/dept">部门管理</RouterLink>
     |
     <RouterLink to="/manage/user/main">用户首页</RouterLink>
+    |
+    <RouterLink to="/manage/user/file">用户文件</RouterLink>
   </div>
 </template>
