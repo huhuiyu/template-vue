@@ -7,6 +7,10 @@
     |
     <RouterLink to="/manage/dept">部门管理</RouterLink>
     |
+    <RouterLink to="/manage/deptinfo">部门管理组件版本</RouterLink>
+    |
+    <RouterLink to="/manage/employee">员工管理</RouterLink>
+    |
     <RouterLink to="/manage/user/main">用户首页</RouterLink>
     |
     <RouterLink to="/manage/user/file">用户文件</RouterLink>
