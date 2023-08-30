@@ -24,6 +24,14 @@ const routers = [
     path: '/manage/user/file',
     component: () => import('../view/manage/File.vue'),
   },
+  {
+    path: '/manage/message',
+    component: () => import('../view/manage/Message.vue'),
+  },
+  {
+    path: '/manage/messagedetail/:umid',
+    component: () => import('../view/manage/MessageDetail.vue'),
+  },
 ]
 
 export default routers
