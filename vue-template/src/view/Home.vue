@@ -14,5 +14,7 @@
     <RouterLink to="/manage/user/main">用户首页</RouterLink>
     |
     <RouterLink to="/manage/user/file">用户文件</RouterLink>
+    |
+    <RouterLink to="/manage/message">留言板路由参数</RouterLink>
   </div>
 </template>
