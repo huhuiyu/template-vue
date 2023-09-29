@@ -1,7 +1,9 @@
-# github =====> git remote add github git@github.com:huhuiyu/template-vue.git
-# jihulab =====> git remote add jihulab git@jihulab.com:DarkKnight/template-vue.git
-# gitee =====> git remote add gitee git@gitee.com:huhuiyu/template-vue.git
+# 多仓库推送
 git pull
-git push
+Write-Output "===========拉取完成==========="
 git push jihulab
+Write-Output "===========推送jihulab完成==========="
 git push gitee
+Write-Output "===========推送gitee完成==========="
+git push
+Write-Output "===========推送github完成==========="
